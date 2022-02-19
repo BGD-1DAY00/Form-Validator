@@ -5,17 +5,7 @@ const password = document.getElementById('password')
 const password2 = document.getElementById('password2')
 
 
-function showError(input, message){
-  const formControl = input.parentElement;
-  formControl.className = 'form-control error';
-  const small = formControl.querySelector('small');
-  small.innerText = message;
-  small.in
-}
-function showSuccess(input){
-  const formControl = input.parentElement;
-  formControl.className = 'form-control success';
-}
+
 function checkPasswordsMatch(input, input2){
   if(input.value !== input2.value){
     showError(input2, 'Passwords do not match')
@@ -30,6 +20,33 @@ function isValidEmail(eInput){
     showError(eInput,`${capitilize(eInput)}; enter a Valid` )
   }
 }
+
+function capitilize(input){
+  return input.id.charAt(0).toUpperCase() + `${(input.id).slice(1)}`
+}
+
+
+function lengthRequired(input, min, max){
+  if(input.value.length <min || input.value.length> max){
+    showError(input, `${capitilize(input)}: Min of ${min}, Max of ${max}`)
+  }
+}
+
+
+function showError(input, message){
+  const formControl = input.parentElement;
+  formControl.className = 'form-control error';
+  const small = formControl.querySelector('small');
+  small.innerText = message;
+}
+
+
+function showSuccess(input){
+  const formControl = input.parentElement;
+  formControl.className = 'form-control success';
+}
+
+
 function required(inputArray){
   inputArray.forEach((input)=>{
     if(input.value.trim()===''){
@@ -38,14 +55,6 @@ function required(inputArray){
       showSuccess(input)
     }
   })
-}
-function capitilize(input){
-  return input.id.charAt(0).toUpperCase() + `${(input.id).slice(1)}`
-}
-function lengthRequired(input, min, max){
-  if(input.value.length <min || input.value.length> max){
-    showError(input, `${capitilize(input)}: Min of ${min}, Max of ${max}`)
-  }
 }
 
 form.addEventListener('submit', function(e){
